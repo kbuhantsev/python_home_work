@@ -3,7 +3,7 @@ def copy_file(file_name="", copy_name=None):
         input_file = open(file_name, "r")
     except FileNotFoundError:
         print("Не удалось открыть входной файл!")
-        return None
+        return False
 
     if copy_name is None:
         file_number = 1
@@ -21,11 +21,14 @@ def copy_file(file_name="", copy_name=None):
         output_file = open(copy_name, "w")
         for line in input_file:
             output_file.write(line)
-            output_file.flush()
+        output_file.flush()
     except FileNotFoundError:
         print("Не удалось найти файл назначения!")
+        return False
     finally:
         output_file.close()
+
+    return True
 
 
 copy_file("cache.txt")
