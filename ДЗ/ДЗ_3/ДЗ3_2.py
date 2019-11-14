@@ -9,8 +9,11 @@ def copy_file(file_name="", copy_name=None):
         file_number = 1
         while True:
             try:
-                new_file_name = file_name.split(".")[0] + str(file_number) \
-                                + "." + file_name.split(".")[1]
+                list_directory = file_name.split("/")
+                full_curr_file_name = list_directory[len(list_directory) - 1]
+                new_file_name = full_curr_file_name[:full_curr_file_name.rfind(".")] \
+                                + str(file_number) \
+                                + full_curr_file_name[full_curr_file_name.rfind("."):]
                 output_file = open(new_file_name)
             except FileNotFoundError:
                 copy_name = new_file_name
@@ -31,5 +34,6 @@ def copy_file(file_name="", copy_name=None):
     return True
 
 
+copy_file("./ca.che.txt")
 copy_file("cache.txt")
-copy_file("cache.txt", "test.txt")
+# copy_file("cache.txt", "test.txt")
